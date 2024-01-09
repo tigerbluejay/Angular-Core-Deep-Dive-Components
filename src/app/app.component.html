@@ -5,22 +5,32 @@
 
 </div>
 
+<!-- <h1> {{ coreCourse.description }} </h1> -->
 
 <div class="courses">
 
-    <div class="course-card">
+    <!-- the brackets indicate that the string should be interpreted
+         as javascript -->
+    <!-- each card component has its own data scope. So title of the
+    first card is different from title of the second, as defined in the
+    tag-->
+    <!--
+    <course-card [title]="coreCourse.description"></course-card>
+    <course-card [title]="rxjsCourse.description"></course-card>
+    <course-card [title]="ngrxCourse.description"></course-card>
+    -->
+    <course-card [course]="coreCourse"></course-card>
+    <course-card [course]="rxjsCourse"></course-card>
+    <course-card [course]="ngrxCourse"></course-card>
 
-        <div class="course-title">
-            Angular Core Deep Dive
-        </div>
-        <img width="300" alt="Angular Logo"
-             src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png">
-
-        <div class="course-description">
-            A detailed walk-through of the most important part of Angular - the Core and Common modules.
-        </div>
-
-    </div>
+    <!-- we can also call a function at the application level component-->
+    <!-- this click event intercepts the click done at the component level and
+    the click bubbles up, such that after the firing of the event defined at the
+    component level, then onCardClicked will be fired-->
+    <course-card (click)="onCardClicked()" [course]="coreCourse"></course-card>
+    <!-- courseSelected is a custom event, not a browser event like click-->
+    <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
+    <course-card (click)="onCardClicked()" [course]="ngrxCourse"></course-card>
 
 </div>
 
