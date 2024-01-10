@@ -27,6 +27,12 @@ export class CourseCardComponent implements OnInit {
   // or a whole object (from the model folder - see imports above)
   course:Course;
 
+  @Input({
+    required: true
+  })
+  index: number;
+
+
   @Output('courseSelected')
   // we emit the custom event courseSelected
   // which is defined in the parent app component

@@ -9,29 +9,67 @@
 
 <div class="courses">
 
+    <!-- @for works for arrays and for any other javascript iterable-->
+    <!-- track allows angular to not have to reload the list when a new course is added to the data-->
+    <!-- $index is a 0 based index that displays the index of the item currently being iterated 
+    $count is a variable that counts the total number of items iterated,
+    $first and $last identify the first and last elements in the array, and by the syntax below
+    a class named is-first and a class named is-last, is applied to the first and last elements of the array,
+    something similar is done to even and odd which correspond to the $even and $odd -->
+    <!-- @for (course of courses; track course.id; let index = $index; let count = $count;
+            let first = $first; let last= $last; let even = $even; let odd = $odd) {
+        <h1>Count: {{ count }} </h1>
+        <course-card [course]="course" 
+        [index]="index" 
+        [class.is-first]="first"
+        [class.is-last]="last"
+        [class.is-even]="even"
+        [class.is-odd]="odd"
+        (courseSelected)="onCourseSelected($event)" />
+    }
+    @empty {
+        <h1>No courses found</h1>
+    } -->
+    <!-- here we implement a tracking function on the track property,
+    in the case you were to receive a list of strings, you can track the
+    list of strings directly. Here we implement tracking function trackCourse
+    you could also do "track $index", it´s not ideal but it will allow the app to work-->
+    @for (course of courses; track trackCourse; let index = $index; let count = $count;
+    let first = $first; let last= $last; let even = $even; let odd = $odd) {
+    <h1>Count: {{ count }} </h1>
+    <course-card [course]="course" 
+    [index]="index" 
+    [class.is-first]="first"
+    [class.is-last]="last"
+    [class.is-even]="even"
+    [class.is-odd]="odd"
+    (courseSelected)="onCourseSelected($event)" />
+    }
+    @empty {
+    <h1>No courses found</h1>
+    }
+    <!-- in case the list is empty, we can display something else -->
+
     <!-- the brackets indicate that the string should be interpreted
          as javascript -->
     <!-- each card component has its own data scope. So title of the
     first card is different from title of the second, as defined in the
-    tag-->
-    <!--
-    <course-card [title]="coreCourse.description"></course-card>
+    tag -->
+    <!-- <course-card [title]="coreCourse.description"></course-card>
     <course-card [title]="rxjsCourse.description"></course-card>
-    <course-card [title]="ngrxCourse.description"></course-card>
-    -->
-    <course-card [course]="coreCourse"></course-card>
+    <course-card [title]="ngrxCourse.description"></course-card> -->
+    <!-- <course-card [course]="coreCourse"></course-card>
     <course-card [course]="rxjsCourse"></course-card>
-    <course-card [course]="ngrxCourse"></course-card>
+    <course-card [course]="ngrxCourse"></course-card> -->
 
-    <!-- we can also call a function at the application level component-->
+    <!-- we can also call a function at the application level component -->
     <!-- this click event intercepts the click done at the component level and
     the click bubbles up, such that after the firing of the event defined at the
-    component level, then onCardClicked will be fired-->
-    <course-card (click)="onCardClicked()" [course]="coreCourse"></course-card>
-    <!-- courseSelected is a custom event, not a browser event like click-->
-    <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
-    <course-card (click)="onCardClicked()" [course]="ngrxCourse"></course-card>
-
+    component level, then onCardClicked will be fired -->
+    <!-- <course-card (click)="onCardClicked()" [course]="coreCourse"></course-card> -->
+    <!-- courseSelected is a custom event, not a browser event like click -->
+    <!-- <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
+    <course-card (click)="onCardClicked()" [course]="ngrxCourse"></course-card> -->
 </div>
 
 

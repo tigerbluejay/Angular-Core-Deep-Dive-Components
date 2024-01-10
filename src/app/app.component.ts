@@ -16,6 +16,8 @@ export class AppComponent {
   rxjsCourse = COURSES[1];
   ngrxCourse = COURSES[2];  
 
+  courses = COURSES;
+
   onCardClicked() {
     console.log("App component - click event bubbled...");
   }
@@ -25,5 +27,9 @@ export class AppComponent {
   onCourseSelected(course:Course) {
     console.log("App component - click event bubbled...", course);
   }
-
+  // in cases where our data does not have a unique identifier like 'id'
+  // we have to write a tracking function, which should return a unique identifier
+  trackCourse(index:number, course:Course){
+    return course.id;
+  }
 }
