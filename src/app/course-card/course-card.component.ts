@@ -32,6 +32,9 @@ export class CourseCardComponent implements OnInit {
   })
   index: number;
 
+  @Input()
+  cardIndex: number;
+
 
   @Output('courseSelected')
   // we emit the custom event courseSelected
@@ -48,5 +51,9 @@ export class CourseCardComponent implements OnInit {
     // with this line we emit the event which will
     // be caught at the parent level (in the app.component)
     this.courseEmitter.emit(this.course);
+  }
+
+  isImageVisible(){
+    return this.course && this.course.iconUrl;
   }
 }
