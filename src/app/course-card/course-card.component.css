@@ -1,0 +1,6 @@
+/* this is also known as a state css class
+it will be applied to courses of type beginner */
+
+.course-card.beginner {
+    background: lightsalmon;
+} 

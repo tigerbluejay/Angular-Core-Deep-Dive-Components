@@ -56,4 +56,33 @@ export class CourseCardComponent implements OnInit {
   isImageVisible(){
     return this.course && this.course.iconUrl;
   }
+
+  // this method called by ngClass returns a configuration
+  // object with the names of classes and whether they are
+  // applied or not. it could have also returned a string or
+  // an array of strings as noted in the html file comments.
+  // cardClasses(){
+  //   return {
+  //     // 'beginner': false, 
+  //     // 'course-card': true
+  //     'beginner': this.course.category == 'BEGINNER'
+  //   };
+  // OR WE COULD ALSO DO
+  cardClasses() {
+    if (this.course.category == 'BEGINNER'){
+      return ['beginner'];
+    }
+  }
+  // returning a string or an array of strings.
+  // cardStyles() {
+  //   return {'text-decoration': 'underline'};
+  // }
+  // but the point of passing a function is to
+  // apply styles based on a condition dependent on
+  // the data
+  cardStyles(){
+    return {
+      'background-image': 'url(' + this.course.iconUrl +')'
+    };
+  }
 }

@@ -2,9 +2,25 @@
 then the contents of the card will not display. This makes uncesseary using
 the questionmark in course?.description for example when trying to avoid
 problems when the course is undefined. -->
-<div class="course-card" *ngIf="course">
-
-    <div class="course-title">
+<!-- ngClass will apply a css class to only certain components. -->
+<!-- <div class="course-card" *ngIf="course"
+[ngClass]="'beginner'"> you can add a class or several classes separated by a space
+[ngClass]="['beginner', 'course-card']"> you can pass an array of classes
+[ngClass]="{'beginner': true, 'course-card'= false}"> you can pass a configuration object with 
+true or false depending on if you want the style to be applied or not.-->
+<!-- Or we can pass a function that returns a configuration object. -->
+<div class="course-card" *ngIf="course"
+[ngClass]="cardClasses()">
+<!-- On the following example we apply as a style a function that 
+returns a background image applied at the level of
+the card so the whole card is backgrounded with the image. -->
+<!-- <div class="course-card" *ngIf="course"
+[ngClass]="cardClasses()"
+[ngStyle]="styleClasses()"> -->
+    <!-- We can also add a style to the div with the style core directive -->
+    <!-- <div class="course-title" [style.text-decoration]="'underline'"> -->
+    <!-- OR -->
+    <!-- <div class="course-title" [ngStyle]="cardStyles()"> -->
         <!-- this reads the title from the course-card component tag
         and the course card component-->
         <!-- {{ title }} -->
@@ -14,7 +30,7 @@ problems when the course is undefined. -->
         if it is, it doesn´t diplay and we avoid an undefined error. -->
         {{ index }} {{ course?.description }}
         <!-- {{ cardIndex + ' ' + course.description }} -->
-    </div>
+    <!-- </div> -->
     <!-- <img width="300" alt="Angular Logo"
          src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png"> -->
     
@@ -57,6 +73,32 @@ problems when the course is undefined. -->
         if it is, it doesn´t diplay and we avoid an undefined error.-->
         {{ course?.longDescription }} 
     </div>
+
+    <!-- Conditionally display items on a page with if or switch to
+    switch within alternatives -->
+    <div class="course-category">
+        @switch(course.category){
+            @case ('BEGINNER'){
+                <div class="category">BEGINNER</div>
+            }
+            @case ('INTERMEDIATE'){
+                <div class="category">INTERMEDIATE</div>
+            }
+            @case ('ADVANCED'){
+                <div class="category">ADVANCED</div>
+            }
+            @default {
+                <div class="category">UNKNOWN</div>
+            }            
+        }
+    </div>
+    <!-- We can use ngSwitch as an alternative to switch -->
+    <!-- <div class="course-category" [ngSwitch]="course.category">
+        <div class="category" *ngSwitchCase="'BEGINNER'">BEGINNER</div>
+        <div class="category" *ngSwitchCase="'INTERMEDIATE'">INTERMEDIATE</div>
+        <div class="category" *ngSwitchCase="'ADVANCED'">ADVANCED</div>
+        <div class="category" *ngSwitchDefault="'UNKNOWN'">UNKNOWN</div>
+    </div> -->
 
     <!-- we can also handle browser events and call functions on them-->
     <button (click)="onCourseViewed()"> View Course </button>
