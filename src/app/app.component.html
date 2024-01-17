@@ -7,6 +7,28 @@
 
 <!-- <h1> {{ coreCourse.description }} </h1> -->
 
+<!-- Pipes take the left side as an input and apply to it
+the right hand side which is a function.
+They serve the purpose of formatting for example. -->
+<div class="demo">
+    <div>Start Date: {{startDate | date: 'MMM/dd/yyyy' }} </div>
+    <div>Title: {{title | uppercase }} </div>
+    <div>Title: {{title | lowercase }} </div>
+    <div>Title: {{title | titlecase }} </div>
+    <div>Price: {{price | number: '3.3-5'}} </div>
+    <div>Price: {{price | currency: 'EUR'}} </div>
+    <div>Rate: {{rate | percent }} </div>
+    <!-- The json pipe transforms the output to json
+    which is useful for debugging purposes -->
+    <!-- <div>Json: {{courses | json }}</div> -->
+    <!-- They keyvalue pipe serves to print the keyvalue
+    pairs especially when looping though the properties of an object -->
+    <!-- <div *ngFor="let pair of course | keyvalue ">
+        {{ pair.key + ': ' + pair.value }}
+    </div> -->
+</div>
+
+
 <div class="courses">
 
 
@@ -91,6 +113,19 @@
     <!-- courseSelected is a custom event, not a browser event like click -->
     <!-- <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
     <course-card (click)="onCardClicked()" [course]="ngrxCourse"></course-card> -->
+
+    <!-- Demonstration of the slice Pipe -->
+    <!-- Here slice will take element 0 and 1 (2 is not included) -->
+    <course-card *ngFor="let course of courses | slice:0:2 ; index as i;
+        first as isFirst; last as isLast; even as isEven; odd as isOdd;"
+        [class.is-first]="isFirst"
+        [class.is-last]="isLast"
+        [class.is-even]="isEven"
+        [class.is-odd]="isOdd"
+        (courseSelected)="onCourseSelected($event)"
+            [course]="course" [cardIndex]="i+1"></course-card>
+
+
 </div>
 
 
