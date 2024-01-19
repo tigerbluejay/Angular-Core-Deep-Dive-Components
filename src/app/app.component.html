@@ -27,40 +27,65 @@ They serve the purpose of formatting for example. -->
         {{ pair.key + ': ' + pair.value }}
     </div> -->
 </div>
+<div>
+<!-- defer allows you to defer loading relevant js bundles
+in the default case: it will start loading the js when the page
+has finished loading of all the previous js, that is when the browser
+becomes idle.
+In the default case, the js is loaded and the js is displayed both
+when the browser becomes idle.
+-->
+@defer {
+    <div class="courses">
 
 
-<div class="courses">
-
-
-    <!-- This old syntax ngFor has been replaced by the for directive.
-    it has similar features as the new modern for, that is, an index,
-    first, last, even and odd, which can be applied to classes defined
-    in the stylesheet. cardIndex i+1 is applied so that in the loop
-    the index changes for every card.
-    Remember we have to define cardIndex in the model (), that is, in the
-    course-card.component.ts file. Also to display we have to add courseIndex
-    to the view, that is in course-card.html. -->
-    <!-- <course-card *ngFor="let course of courses; index as i;
-        first as isFirst; last as isLast; even as isEven; odd as isOdd;"
-        [class.is-first]="isFirst"
-        [class.is-last]="isLast"
-        [class.is-even]="isEven"
-        [class.is-odd]="isOdd"
-        (courseSelected)="onCourseSelected($event)"
-            [course]="course" [cardIndex]="i+1"></course-card> -->
-
-    <!-- To migrate from ngFor to For and in general from the old sytax to the new
-    syntax we can use the command in the terminal "ng generate @angular/core:control-flow"
-     -->
-    <!-- @for works for arrays and for any other javascript iterable-->
-    <!-- track allows angular to not have to reload the list when a new course is added to the data-->
-    <!-- $index is a 0 based index that displays the index of the item currently being iterated 
-    $count is a variable that counts the total number of items iterated,
-    $first and $last identify the first and last elements in the array, and by the syntax below
-    a class named is-first and a class named is-last, is applied to the first and last elements of the array,
-    something similar is done to even and odd which correspond to the $even and $odd -->
-    @for (course of courses; track course.id; let index = $index; let count = $count;
-            let first = $first; let last= $last; let even = $even; let odd = $odd) {
+        <!-- This old syntax ngFor has been replaced by the for directive.
+        it has similar features as the new modern for, that is, an index,
+        first, last, even and odd, which can be applied to classes defined
+        in the stylesheet. cardIndex i+1 is applied so that in the loop
+        the index changes for every card.
+        Remember we have to define cardIndex in the model (), that is, in the
+        course-card.component.ts file. Also to display we have to add courseIndex
+        to the view, that is in course-card.html. -->
+        <!-- <course-card *ngFor="let course of courses; index as i;
+            first as isFirst; last as isLast; even as isEven; odd as isOdd;"
+            [class.is-first]="isFirst"
+            [class.is-last]="isLast"
+            [class.is-even]="isEven"
+            [class.is-odd]="isOdd"
+            (courseSelected)="onCourseSelected($event)"
+                [course]="course" [cardIndex]="i+1"></course-card> -->
+    
+        <!-- To migrate from ngFor to For and in general from the old sytax to the new
+        syntax we can use the command in the terminal "ng generate @angular/core:control-flow"
+         -->
+        <!-- @for works for arrays and for any other javascript iterable-->
+        <!-- track allows angular to not have to reload the list when a new course is added to the data-->
+        <!-- $index is a 0 based index that displays the index of the item currently being iterated 
+        $count is a variable that counts the total number of items iterated,
+        $first and $last identify the first and last elements in the array, and by the syntax below
+        a class named is-first and a class named is-last, is applied to the first and last elements of the array,
+        something similar is done to even and odd which correspond to the $even and $odd -->
+        @for (course of courses; track course.id; let index = $index; let count = $count;
+                let first = $first; let last= $last; let even = $even; let odd = $odd) {
+            <h1>Count: {{ count }} </h1>
+            <course-card [course]="course" 
+            [index]="index" 
+            [class.is-first]="first"
+            [class.is-last]="last"
+            [class.is-even]="even"
+            [class.is-odd]="odd"
+            (courseSelected)="onCourseSelected($event)" />
+        }
+        @empty {
+            <h1>No courses found</h1>
+        }
+        <!-- here we implement a tracking function on the track property,
+        in the case you were to receive a list of strings, you can track the
+        list of strings directly. Here we implement tracking function trackCourse
+        you could also do "track $index", it´s not ideal but it will allow the app to work-->
+        <!-- @for (course of courses; track trackCourse; let index = $index; let count = $count;
+        let first = $first; let last= $last; let even = $even; let odd = $odd) {
         <h1>Count: {{ count }} </h1>
         <course-card [course]="course" 
         [index]="index" 
@@ -69,62 +94,68 @@ They serve the purpose of formatting for example. -->
         [class.is-even]="even"
         [class.is-odd]="odd"
         (courseSelected)="onCourseSelected($event)" />
-    }
-    @empty {
+        }
+        @empty {
         <h1>No courses found</h1>
-    }
-    <!-- here we implement a tracking function on the track property,
-    in the case you were to receive a list of strings, you can track the
-    list of strings directly. Here we implement tracking function trackCourse
-    you could also do "track $index", it´s not ideal but it will allow the app to work-->
-    <!-- @for (course of courses; track trackCourse; let index = $index; let count = $count;
-    let first = $first; let last= $last; let even = $even; let odd = $odd) {
-    <h1>Count: {{ count }} </h1>
-    <course-card [course]="course" 
-    [index]="index" 
-    [class.is-first]="first"
-    [class.is-last]="last"
-    [class.is-even]="even"
-    [class.is-odd]="odd"
-    (courseSelected)="onCourseSelected($event)" />
-    }
-    @empty {
-    <h1>No courses found</h1>
-    } -->
-    <!-- in case the list is empty, we can display something else -->
+        } -->
+        <!-- in case the list is empty, we can display something else -->
+    
+        <!-- the brackets indicate that the string should be interpreted
+             as javascript -->
+        <!-- each card component has its own data scope. So title of the
+        first card is different from title of the second, as defined in the
+        tag -->
+        <!-- <course-card [title]="coreCourse.description"></course-card>
+        <course-card [title]="rxjsCourse.description"></course-card>
+        <course-card [title]="ngrxCourse.description"></course-card> -->
+        <!-- <course-card [course]="coreCourse"></course-card>
+        <course-card [course]="rxjsCourse"></course-card>
+        <course-card [course]="ngrxCourse"></course-card> -->
+    
+        <!-- we can also call a function at the application level component -->
+        <!-- this click event intercepts the click done at the component level and
+        the click bubbles up, such that after the firing of the event defined at the
+        component level, then onCardClicked will be fired -->
+        <!-- <course-card (click)="onCardClicked()" [course]="coreCourse"></course-card> -->
+        <!-- courseSelected is a custom event, not a browser event like click -->
+        <!-- <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
+        <course-card (click)="onCardClicked()" [course]="ngrxCourse"></course-card> -->
+    
+        <!-- Demonstration of the slice Pipe -->
+        <!-- Here slice will take element 0 and 1 (2 is not included) -->
+        <course-card *ngFor="let course of courses | slice:0:2 ; index as i;
+            first as isFirst; last as isLast; even as isEven; odd as isOdd;"
+            [class.is-first]="isFirst"
+            [class.is-last]="isLast"
+            [class.is-even]="isEven"
+            [class.is-odd]="isOdd"
+            (courseSelected)="onCourseSelected($event)"
+                [course]="course" [cardIndex]="i+1"></course-card>
+    
+    
+    </div>
+}
+@loading (minimum 3s; after 1s) {
+    <h2> This is a loading indicator...</h2>
+}
+<!-- instead of the placeholder block immediately after the defer block
+we can use the loading indicator, which is intented to
+display a loading message letting the user know the content is
+loading
+if the loading process takes more than 1 second, only then show
+the loading indicator for 3 seconds-->
 
-    <!-- the brackets indicate that the string should be interpreted
-         as javascript -->
-    <!-- each card component has its own data scope. So title of the
-    first card is different from title of the second, as defined in the
-    tag -->
-    <!-- <course-card [title]="coreCourse.description"></course-card>
-    <course-card [title]="rxjsCourse.description"></course-card>
-    <course-card [title]="ngrxCourse.description"></course-card> -->
-    <!-- <course-card [course]="coreCourse"></course-card>
-    <course-card [course]="rxjsCourse"></course-card>
-    <course-card [course]="ngrxCourse"></course-card> -->
-
-    <!-- we can also call a function at the application level component -->
-    <!-- this click event intercepts the click done at the component level and
-    the click bubbles up, such that after the firing of the event defined at the
-    component level, then onCardClicked will be fired -->
-    <!-- <course-card (click)="onCardClicked()" [course]="coreCourse"></course-card> -->
-    <!-- courseSelected is a custom event, not a browser event like click -->
-    <!-- <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
-    <course-card (click)="onCardClicked()" [course]="ngrxCourse"></course-card> -->
-
-    <!-- Demonstration of the slice Pipe -->
-    <!-- Here slice will take element 0 and 1 (2 is not included) -->
-    <course-card *ngFor="let course of courses | slice:0:2 ; index as i;
-        first as isFirst; last as isLast; even as isEven; odd as isOdd;"
-        [class.is-first]="isFirst"
-        [class.is-last]="isLast"
-        [class.is-even]="isEven"
-        [class.is-odd]="isOdd"
-        (courseSelected)="onCourseSelected($event)"
-            [course]="course" [cardIndex]="i+1"></course-card>
-
+<!-- the placeholder replaces the defer template content
+until the defer is ready to display the content
+in the optional parentheses you can specify a minimum display
+time for the placeholder content
+Usually in the placeholder we put a simplified version of
+the template that is displayed in the defered block
+anything you put in the placeholder will not be defered 
+@placeholder(minimum 3s) {
+    <h2>Wait until the contents load please</h2>
+}
+-->
 
 </div>
 

@@ -1,3 +1,10 @@
+<!-- If we don't have a div element to apply the ngif or
+other such directive to a bunch of nested tags, We
+can use the ng-container element to prevent us from gratuitiously
+adding a div. We can apply to an ngSwitch or an ngCase also
+<ng-container *ngIf="course">
+</ng-container> -->
+
 <!-- If we use ngIf at the parent level html element if course is not defined
 then the contents of the card will not display. This makes uncesseary using
 the questionmark in course?.description for example when trying to avoid
