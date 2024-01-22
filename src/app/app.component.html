@@ -36,8 +36,72 @@ In the default case, the js is loaded and the js is displayed both
 when the browser becomes idle.
 -->
 @defer {
-    <div class="courses">
+    <!-- this defer, defers on idle so you can rewrite it
+        alternatively as
+        1) @defer (on idle; prefetch on idle)
+        or alternatively as
+        2) @defer (on immediate; prefetch on immediate)
+        remember that if you use "on" only and you don´t define
+        "prefetch", angular understands that you will be using
+        the trigger that you defined on on, also on prefetch.
+        Prefetch refers to fetching or loading the javascript code.
+        While on refers to actually displaying the code on screen.
+    -->
+        <!-- Now with the timer trigger we specify a time for prefetch
+        and a time for on, for example
+        3) @defer (on timer(15s); prefetch timer(10s))
+        means the contents of the defer block will not be displayed 
+        until 15 seconds pass, that is 5 seconds after is the js is loaded. 
+    -->
+        <!-- Now only when the component is visible it will load.
+        4) @defer (on viewport; prefetch on idle)
+        On viewport then means that once the view space where
+        the component would load is visible, then it will load. 
+    -->
+        <!-- If we want the content to load when an html element becomes visible 
+        then we first define an html element such as 
+        <h1 #title>The visibility of this element will trigger the content</h1>
+        then we define the defer block as such
+        5) @defer (on viewport(title); prefetch on idle)
+        So what happens is when the h1 element named title is visible
+        the contents of the defer block will be displayed to the user. 
+    -->
+        <!-- The interaction trigger interacts with the placeholder content.
+        This means focusing and typing, or clicking or any interaction with
+        the placeholder contents.
+        6) @defer (on interaction; prefetch on interaction)
+        We can further define elements outside the placeholder content.
+        For instance: if we say
+        7) @defer (on interaction(display); prefetch on interaction(prefetch))
+        and we have the following code outside the placeholder
+        <div class="demo-triggers">
+            <input placeholder="Type to trigger prefetch" #prefetch>
+            <button #display>Trigger Display</button>
+        </div>
+        Then when we click or type in the input box, the prefetch will occur.
+        And when we click on on the button, the contents of the defer block will load. 
+    -->
+        <!-- Now the hover trigger.
+        if we do the following:
+        8) @defer (on interaction(display); prefetch on hover)
+        that is we use hover as a standalone argument,
+        then the prefetch will occur when we hover over the
+        placeholder block content. Then if i click on the html element 
+        that has the name of display, then the defer block contents will load.
+        Now for the final hover example.
+        Suppose we have this code outside the placeholder block.
+        <div #triggerDisplay sytle="border: 5px solid red; min-height: 200px; margin: 10px;">
+            <button #display>Trigger Display</button>
+        </div>" 
+        If we define our defer block to be:
+        9) @defer (on interaction(display); prefetch on hover(triggerDisplay)
+        Then this means that when we go into the bounds of the red border div,
+        hovering with our cursor, the prefetch will occur and the js bundle will be loaded
+        But only when we click on the button named "display", will the contents of the 
+        defer block become visible. 
+    -->
 
+    <div class="courses">
 
         <!-- This old syntax ngFor has been replaced by the for directive.
         it has similar features as the new modern for, that is, an index,
@@ -138,6 +202,9 @@ when the browser becomes idle.
 @loading (minimum 3s; after 1s) {
     <h2> This is a loading indicator...</h2>
 }
+@error {
+    <h2>An error has occurred!</h2>
+}
 <!-- instead of the placeholder block immediately after the defer block
 we can use the loading indicator, which is intented to
 display a loading message letting the user know the content is
@@ -156,6 +223,15 @@ anything you put in the placeholder will not be defered
     <h2>Wait until the contents load please</h2>
 }
 -->
+<!-- the
+@error 
+block contents will display after the defer on condition
+attempts to execute. So first the defer prefetch is executed
+then the defer on is executed, and if that fails, then the
+error block contents load.
+Here we put on this block a simple error message-->
+
+
 
 </div>
 
