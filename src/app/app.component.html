@@ -5,19 +5,50 @@
 
 </div>
 
+<!-- Template Querying with View Child and View Children:
+We perform a template query to obtain a reference to
+an element template and access it at the level of our
+component class. -->
+
+<!-- The onCoursesEdited event handler method will be called
+when we click on the button. -->
+<button (click)="onCoursesEdited()">Edit Courses</button>
+
+<div class="courses" #container>
+    
+    <course-card #cardRef1
+    (courseSelected)="onCourseSelected2($event)"
+    [course]="courses[0]">
+    </course-card>
+    
+    <course-card #cardRef2
+    (courseSelected)="onCourseSelected2($event)"
+    [course]="courses[1]">
+    </course-card>
+
+    <!-- This iteration is used to demonstratre the 
+    @ViewChildren decorator -->
+    <course-card *ngFor="let course of courses"
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course">
+    </course-card>
+
+</div>
+
+
 <!-- <h1> {{ coreCourse.description }} </h1> -->
 
 <!-- Pipes take the left side as an input and apply to it
 the right hand side which is a function.
 They serve the purpose of formatting for example. -->
-<div class="demo">
+<!-- <div class="demo">
     <div>Start Date: {{startDate | date: 'MMM/dd/yyyy' }} </div>
     <div>Title: {{title | uppercase }} </div>
     <div>Title: {{title | lowercase }} </div>
     <div>Title: {{title | titlecase }} </div>
     <div>Price: {{price | number: '3.3-5'}} </div>
     <div>Price: {{price | currency: 'EUR'}} </div>
-    <div>Rate: {{rate | percent }} </div>
+    <div>Rate: {{rate | percent }} </div> -->
     <!-- The json pipe transforms the output to json
     which is useful for debugging purposes -->
     <!-- <div>Json: {{courses | json }}</div> -->
@@ -26,8 +57,8 @@ They serve the purpose of formatting for example. -->
     <!-- <div *ngFor="let pair of course | keyvalue ">
         {{ pair.key + ': ' + pair.value }}
     </div> -->
-</div>
-<div>
+<!-- </div>
+<div> -->
 <!-- defer allows you to defer loading relevant js bundles
 in the default case: it will start loading the js when the page
 has finished loading of all the previous js, that is when the browser
@@ -35,7 +66,7 @@ becomes idle.
 In the default case, the js is loaded and the js is displayed both
 when the browser becomes idle.
 -->
-@defer {
+<!-- @defer { -->
     <!-- this defer, defers on idle so you can rewrite it
         alternatively as
         1) @defer (on idle; prefetch on idle)
@@ -100,8 +131,40 @@ when the browser becomes idle.
         But only when we click on the button named "display", will the contents of the 
         defer block become visible. 
     -->
+        <!-- Finally we can define custom triggers. How?
+        Suppose you have 
+        10) @defer(when display; prefetch when performPrefetch)
+        On custom triggers we use the keyword when, and 
+        the triggers will be fired when display and performPrefetch 
+        or any other such arbirarily named variable, is true.
+        We also have the following html 
+        <div>
+            <button (click)="onPrefetch()">Trigger Prefetch</button>
+            <button (click)="onDisplay()">Trigger Display</button>
+        </div>
+        Such that when we click the buttons the methods will be invoked.
+        These methods change the display and performPrefetch variables to true. 
+        These variables in turn are defined in the model ts file. 
+        ...
+        export class AppComponent {
+            performPrefetch: boolean = false;
+            display: boolean = false;
+        
+            onPrefetch() {
+                this.performPrefetch = true;
+            }
+            onDisplay() {
+                this.display = true;
+            }
+        } 
+        So now when the buttons are clicked the variables turn to true 
+        and the triggers are triggered.
+        Finally for all these examples note that if you trigger the on or 
+        when display properties befor triggering the prefetch, the prefetch is
+        immediately triggered to accomodate to the display trigger, which has priority 
+    -->
 
-    <div class="courses">
+    <!-- <div class="courses"> -->
 
         <!-- This old syntax ngFor has been replaced by the for directive.
         it has similar features as the new modern for, that is, an index,
@@ -130,7 +193,7 @@ when the browser becomes idle.
         $first and $last identify the first and last elements in the array, and by the syntax below
         a class named is-first and a class named is-last, is applied to the first and last elements of the array,
         something similar is done to even and odd which correspond to the $even and $odd -->
-        @for (course of courses; track course.id; let index = $index; let count = $count;
+        <!-- @for (course of courses; track course.id; let index = $index; let count = $count;
                 let first = $first; let last= $last; let even = $even; let odd = $odd) {
             <h1>Count: {{ count }} </h1>
             <course-card [course]="course" 
@@ -143,7 +206,7 @@ when the browser becomes idle.
         }
         @empty {
             <h1>No courses found</h1>
-        }
+        } -->
         <!-- here we implement a tracking function on the track property,
         in the case you were to receive a list of strings, you can track the
         list of strings directly. Here we implement tracking function trackCourse
@@ -187,7 +250,7 @@ when the browser becomes idle.
     
         <!-- Demonstration of the slice Pipe -->
         <!-- Here slice will take element 0 and 1 (2 is not included) -->
-        <course-card *ngFor="let course of courses | slice:0:2 ; index as i;
+        <!-- <course-card *ngFor="let course of courses | slice:0:2 ; index as i;
             first as isFirst; last as isLast; even as isEven; odd as isOdd;"
             [class.is-first]="isFirst"
             [class.is-last]="isLast"
@@ -204,7 +267,7 @@ when the browser becomes idle.
 }
 @error {
     <h2>An error has occurred!</h2>
-}
+} -->
 <!-- instead of the placeholder block immediately after the defer block
 we can use the loading indicator, which is intented to
 display a loading message letting the user know the content is
@@ -233,6 +296,6 @@ Here we put on this block a simple error message-->
 
 
 
-</div>
+<!-- </div> -->
 
 

@@ -28,7 +28,7 @@ export class CourseCardComponent implements OnInit {
   course:Course;
 
   @Input({
-    required: true
+    required: false
   })
   index: number;
 

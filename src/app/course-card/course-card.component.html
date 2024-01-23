@@ -35,7 +35,7 @@ the card so the whole card is backgrounded with the image. -->
         in the course-card component-->
         <!-- We can add a question mark which will see if course is null
         if it is, it doesn´t diplay and we avoid an undefined error. -->
-        {{ index }} {{ course?.description }}
+        {{ index || '' }} {{ course?.description }}
         <!-- {{ cardIndex + ' ' + course.description }} -->
     <!-- </div> -->
     <!-- <img width="300" alt="Angular Logo"
