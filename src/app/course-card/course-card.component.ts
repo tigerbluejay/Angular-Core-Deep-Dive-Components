@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, ContentChild, AfterViewInit, ElementRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { COURSES } from '../../db-data';
 import { Course } from '../model/course';
+import { CourseImageComponent } from '../course-image/course-image.component';
 
 @Component({
   // selector defines what the html tag is for this component
@@ -12,7 +13,7 @@ import { Course } from '../model/course';
   templateUrl: './course-card.component.html',
   styleUrl: './course-card.component.css'
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent implements OnInit, AfterViewInit {
 
   // here we add the input property title
   // to the course-card
@@ -42,7 +43,21 @@ export class CourseCardComponent implements OnInit {
   // we pass a parameter of an instance of Course
   courseEmitter = new EventEmitter<Course>();
 
+  // This is exactly like @ViewChild but the query 
+  // covers only the projected content. That is content
+  // that is projected from the parent template and captured
+  // by the child template with the ng-content tag
+  // So ContentChild queries the ng-content content
+  // @ContentChild('courseImage')
+  // image;
+  @ContentChild(CourseImageComponent, {read: ElementRef})
+  image: ElementRef;
+
   constructor() {}
+
+  ngAfterViewInit() {
+    console.log(this.image);
+  }
 
   ngOnInit(){}
 

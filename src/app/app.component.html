@@ -5,6 +5,42 @@
 
 </div>
 
+<!-- This section deals with Content Projection -->
+<!-- Here with this ngIf notation we only display course[0] content -->
+<!-- So in the app template as a child of the course-card compoennt we pass on 
+configuration, in this case an image tag. And from within the course-card 
+template we project the image element here into the component. -->
+
+<div class="courses" *ngIf="courses[0] as course">
+    <course-card
+        (courseSelected)="onCourseSelected($event)"
+        [course] = "course">
+
+        <div class="course-image" #courseImage>
+
+            <img width="300" alt="Angular Logo"
+            [src]="course.iconUrl">
+        
+        </div>
+
+<!--    <course-image [src]="course.iconUrl"></course-image> -->
+
+        <div class="course-description">
+            {{ course.longDescription }}
+        </div>
+
+    </course-card>
+
+</div>
+
+
+
+
+
+
+
+
+
 <!-- Template Querying with View Child and View Children:
 We perform a template query to obtain a reference to
 an element template and access it at the level of our
@@ -12,7 +48,7 @@ component class. -->
 
 <!-- The onCoursesEdited event handler method will be called
 when we click on the button. -->
-<button (click)="onCoursesEdited()">Edit Courses</button>
+<!-- <button (click)="onCoursesEdited()">Edit Courses</button>
 
 <div class="courses" #container>
     
@@ -26,14 +62,14 @@ when we click on the button. -->
     [course]="courses[1]">
     </course-card>
 
-    <!-- This iteration is used to demonstratre the 
+    This iteration is used to demonstratre the 
     @ViewChildren decorator -->
-    <course-card *ngFor="let course of courses"
+    <!-- <course-card *ngFor="let course of courses"
     (courseSelected)="onCourseSelected($event)"
     [course]="course">
     </course-card>
 
-</div>
+</div> -->
 
 
 <!-- <h1> {{ coreCourse.description }} </h1> -->

@@ -1,3 +1,36 @@
+<div class="course-card" *ngIf="course" #container>
+    <div class="course-title">
+        {{ cardIndex || ' ' + ' ' + course.description}}
+    </div>
+
+    <!-- Content Projection-->
+    <!-- This tag loads the content projected from the child tag of 
+    the course card element in the app.component view. -->
+    <!-- <ng-content></ng-content> -->
+
+    <!-- We can also restrain what gets projected
+    Project by tag -->
+    <!-- <ng-content select="img"></ng-content> -->
+    <!-- Project by class -->
+    <ng-content select=".course-image"></ng-content>
+    <ng-content select=".course-description"></ng-content>
+    <!-- Project by component-->
+    <!-- <ng-content select="course-image"></ng-content> -->
+
+    <div class="course-category" [ngSwitch]="course.category">
+        <div class="category" *ngSwitchCase="'BEGINNER'">Beginner</div>
+        <div class="category" *ngSwitchCase="'INTERMEDIATE'">Intermediate</div>
+        <div class="category" *ngSwitchCase="'ADVANCED'">Advanced</div>
+    </div>
+
+    <button (click)="onCourseViewed()">View Course</button>
+</div>
+
+
+
+
+
+
 <!-- If we don't have a div element to apply the ngif or
 other such directive to a bunch of nested tags, We
 can use the ng-container element to prevent us from gratuitiously
@@ -16,8 +49,8 @@ problems when the course is undefined. -->
 [ngClass]="{'beginner': true, 'course-card'= false}"> you can pass a configuration object with 
 true or false depending on if you want the style to be applied or not.-->
 <!-- Or we can pass a function that returns a configuration object. -->
-<div class="course-card" *ngIf="course"
-[ngClass]="cardClasses()">
+<!-- <div class="course-card" *ngIf="course"
+[ngClass]="cardClasses()"> -->
 <!-- On the following example we apply as a style a function that 
 returns a background image applied at the level of
 the card so the whole card is backgrounded with the image. -->
@@ -35,7 +68,7 @@ the card so the whole card is backgrounded with the image. -->
         in the course-card component-->
         <!-- We can add a question mark which will see if course is null
         if it is, it doesn´t diplay and we avoid an undefined error. -->
-        {{ index || '' }} {{ course?.description }}
+        <!-- {{ index || '' }} {{ course?.description }} -->
         <!-- {{ cardIndex + ' ' + course.description }} -->
     <!-- </div> -->
     <!-- <img width="300" alt="Angular Logo"
@@ -52,9 +85,9 @@ the card so the whole card is backgrounded with the image. -->
     conditions are met, in this case if the course is defined and if there
     is an image defined. -->
 
-    <img width="300" alt="Angular Logo" 
+    <!-- <img width="300" alt="Angular Logo" 
     *ngIf="isImageVisible(); else noImage" 
-    [src]="course.iconUrl">
+    [src]="course.iconUrl"> -->
 
     <!-- The if conditional directive works to display html elements or
     parts of the code based on some condition. In the example below
@@ -69,21 +102,21 @@ the card so the whole card is backgrounded with the image. -->
         <h2>No image available</h2>
     } -->
 
-    <ng-template #noImage>
+    <!-- <ng-template #noImage>
         <p>No image is available</p>
-    </ng-template>
+    </ng-template> -->
 
 
-    <div class="course-description">
+    <!-- <div class="course-description"> -->
         <!-- A detailed walk-through of the most important part of Angular - the Core and Common modules. -->
         <!-- We can add a question mark which will see if course is null
         if it is, it doesn´t diplay and we avoid an undefined error.-->
-        {{ course?.longDescription }} 
-    </div>
+        <!-- {{ course?.longDescription }} 
+    </div> -->
 
     <!-- Conditionally display items on a page with if or switch to
     switch within alternatives -->
-    <div class="course-category">
+    <!-- <div class="course-category">
         @switch(course.category){
             @case ('BEGINNER'){
                 <div class="category">BEGINNER</div>
@@ -98,7 +131,7 @@ the card so the whole card is backgrounded with the image. -->
                 <div class="category">UNKNOWN</div>
             }            
         }
-    </div>
+    </div> -->
     <!-- We can use ngSwitch as an alternative to switch -->
     <!-- <div class="course-category" [ngSwitch]="course.category">
         <div class="category" *ngSwitchCase="'BEGINNER'">BEGINNER</div>
@@ -108,9 +141,9 @@ the card so the whole card is backgrounded with the image. -->
     </div> -->
 
     <!-- we can also handle browser events and call functions on them-->
-    <button (click)="onCourseViewed()"> View Course </button>
+    <!-- <button (click)="onCourseViewed()"> View Course </button>
 
-</div>
+</div> -->
 
 <!-- EVENTS 
 On the button html element, there´s a native browser event click associated with a method OnCourseViewed()
