@@ -16,6 +16,19 @@
     <ng-content select=".course-description"></ng-content>
     <!-- Project by component-->
     <!-- <ng-content select="course-image"></ng-content> -->
+ 
+    <!-- ngTemplate -->
+    <!-- Here we say if there is no iconUrl, then display the 
+    ngtemplate block titled #blankImage -->
+    <!-- <ng-content select=".course-image"
+        *ngIf="course.iconUrl; else blankImage"></ng-content>
+
+    <ng-template #blankImage>
+
+        <p class="warn"> No image is available yet.</p>
+        <img src="/assets/empty-image.png">
+
+    </ng-template> -->
 
     <div class="course-category" [ngSwitch]="course.category">
         <div class="category" *ngSwitchCase="'BEGINNER'">Beginner</div>
@@ -57,42 +70,42 @@ the card so the whole card is backgrounded with the image. -->
 <!-- <div class="course-card" *ngIf="course"
 [ngClass]="cardClasses()"
 [ngStyle]="styleClasses()"> -->
-    <!-- We can also add a style to the div with the style core directive -->
-    <!-- <div class="course-title" [style.text-decoration]="'underline'"> -->
-    <!-- OR -->
-    <!-- <div class="course-title" [ngStyle]="cardStyles()"> -->
-        <!-- this reads the title from the course-card component tag
+<!-- We can also add a style to the div with the style core directive -->
+<!-- <div class="course-title" [style.text-decoration]="'underline'"> -->
+<!-- OR -->
+<!-- <div class="course-title" [ngStyle]="cardStyles()"> -->
+<!-- this reads the title from the course-card component tag
         and the course card component-->
-        <!-- {{ title }} -->
-        <!-- this reads the course object and its properties, as defined 
+<!-- {{ title }} -->
+<!-- this reads the course object and its properties, as defined 
         in the course-card component-->
-        <!-- We can add a question mark which will see if course is null
+<!-- We can add a question mark which will see if course is null
         if it is, it doesn´t diplay and we avoid an undefined error. -->
-        <!-- {{ index || '' }} {{ course?.description }} -->
-        <!-- {{ cardIndex + ' ' + course.description }} -->
-    <!-- </div> -->
-    <!-- <img width="300" alt="Angular Logo"
+<!-- {{ index || '' }} {{ course?.description }} -->
+<!-- {{ cardIndex + ' ' + course.description }} -->
+<!-- </div> -->
+<!-- <img width="300" alt="Angular Logo"
          src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png"> -->
-    
- 
-    <!-- With ngIf if the object we pass to ngIf is undefined it will evaluate
+
+
+<!-- With ngIf if the object we pass to ngIf is undefined it will evaluate
     to false and the html element will not display. If it is defined, it will
     return true and the html element will display. -->
-    <!-- <img width="300" alt="Angular Logo" 
+<!-- <img width="300" alt="Angular Logo" 
     *ngIf="course.iconUrl" [src]="course.iconUrl"> -->
 
-    <!-- Alternatively we can pass a function that can evaluate to true if certain
+<!-- Alternatively we can pass a function that can evaluate to true if certain
     conditions are met, in this case if the course is defined and if there
     is an image defined. -->
 
-    <!-- <img width="300" alt="Angular Logo" 
+<!-- <img width="300" alt="Angular Logo" 
     *ngIf="isImageVisible(); else noImage" 
     [src]="course.iconUrl"> -->
 
-    <!-- The if conditional directive works to display html elements or
+<!-- The if conditional directive works to display html elements or
     parts of the code based on some condition. In the example below
     the if condition is related to the data we are handling. -->
-    <!-- @if (course.id == 1) {
+<!-- @if (course.id == 1) {
         <h2>Course with ID 1 detected</h2>
     }
     @else if(course.iconUrl) {
@@ -102,21 +115,21 @@ the card so the whole card is backgrounded with the image. -->
         <h2>No image available</h2>
     } -->
 
-    <!-- <ng-template #noImage>
+<!-- <ng-template #noImage>
         <p>No image is available</p>
     </ng-template> -->
 
 
-    <!-- <div class="course-description"> -->
-        <!-- A detailed walk-through of the most important part of Angular - the Core and Common modules. -->
-        <!-- We can add a question mark which will see if course is null
+<!-- <div class="course-description"> -->
+<!-- A detailed walk-through of the most important part of Angular - the Core and Common modules. -->
+<!-- We can add a question mark which will see if course is null
         if it is, it doesn´t diplay and we avoid an undefined error.-->
-        <!-- {{ course?.longDescription }} 
+<!-- {{ course?.longDescription }} 
     </div> -->
 
-    <!-- Conditionally display items on a page with if or switch to
+<!-- Conditionally display items on a page with if or switch to
     switch within alternatives -->
-    <!-- <div class="course-category">
+<!-- <div class="course-category">
         @switch(course.category){
             @case ('BEGINNER'){
                 <div class="category">BEGINNER</div>
@@ -132,16 +145,16 @@ the card so the whole card is backgrounded with the image. -->
             }            
         }
     </div> -->
-    <!-- We can use ngSwitch as an alternative to switch -->
-    <!-- <div class="course-category" [ngSwitch]="course.category">
+<!-- We can use ngSwitch as an alternative to switch -->
+<!-- <div class="course-category" [ngSwitch]="course.category">
         <div class="category" *ngSwitchCase="'BEGINNER'">BEGINNER</div>
         <div class="category" *ngSwitchCase="'INTERMEDIATE'">INTERMEDIATE</div>
         <div class="category" *ngSwitchCase="'ADVANCED'">ADVANCED</div>
         <div class="category" *ngSwitchDefault="'UNKNOWN'">UNKNOWN</div>
     </div> -->
 
-    <!-- we can also handle browser events and call functions on them-->
-    <!-- <button (click)="onCourseViewed()"> View Course </button>
+<!-- we can also handle browser events and call functions on them-->
+<!-- <button (click)="onCourseViewed()"> View Course </button>
 
 </div> -->
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter, Output, ContentChild, AfterViewInit, ElementRef} from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, ContentChild, AfterViewInit, ElementRef, ContentChildren, AfterContentInit, QueryList} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { COURSES } from '../../db-data';
 import { Course } from '../model/course';
@@ -13,7 +13,9 @@ import { CourseImageComponent } from '../course-image/course-image.component';
   templateUrl: './course-card.component.html',
   styleUrl: './course-card.component.css'
 })
-export class CourseCardComponent implements OnInit, AfterViewInit {
+// AfterViewInit and AfterContentInit are interfaces which implement methods that serve
+// to visualize content at the earliest possible time - these methods are also called lifecycle hooks
+export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   // here we add the input property title
   // to the course-card
@@ -50,13 +52,23 @@ export class CourseCardComponent implements OnInit, AfterViewInit {
   // So ContentChild queries the ng-content content
   // @ContentChild('courseImage')
   // image;
-  @ContentChild(CourseImageComponent, {read: ElementRef})
-  image: ElementRef;
+  // @ContentChild(CourseImageComponent, {read: ElementRef})
+  // image: ElementRef;
+  // we could query three images in one go with the ContentChildren decorator
+  // the second parameter read: ElementRef is to grab not the component but the
+  // DOM element
+  @ContentChildren(CourseImageComponent, {read: ElementRef})
+  images: QueryList<CourseImageComponent>;
 
   constructor() {}
+  // the earliest possible moment when contentChild and 
+  // contentChildren are loaded
+  ngAfterContentInit(): void {
+    console.log(this.images);
+  }
 
   ngAfterViewInit() {
-    console.log(this.image);
+    // console.log(this.images);
   }
 
   ngOnInit(){}
