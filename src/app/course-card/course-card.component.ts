@@ -13,8 +13,10 @@ import { CourseImageComponent } from '../course-image/course-image.component';
   templateUrl: './course-card.component.html',
   styleUrl: './course-card.component.css'
 })
+
 // AfterViewInit and AfterContentInit are interfaces which implement methods that serve
-// to visualize content at the earliest possible time - these methods are also called lifecycle hooks
+// to visualize content at the earliest possible time - these methods are also 
+// called lifecycle hooks
 export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   // here we add the input property title
@@ -45,6 +47,7 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
   // we pass a parameter of an instance of Course
   courseEmitter = new EventEmitter<Course>();
 
+  // CONTENT CHILD AND CONTENT CHILDREN
   // This is exactly like @ViewChild but the query 
   // covers only the projected content. That is content
   // that is projected from the parent template and captured

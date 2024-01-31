@@ -14,8 +14,7 @@ export class AppComponent implements AfterViewInit{
     console.log(this.cards.first); // prints the first element of the collection - the first card on the list
     console.log(this.cards.last);
 
-    // an observable "changes"
-    // native to the angular api
+    // an observable "changes" native to the angular api
     // this observable is going to emit multiple values
     // over time as the collection gets modified
     // the anonymous function will be called whenever

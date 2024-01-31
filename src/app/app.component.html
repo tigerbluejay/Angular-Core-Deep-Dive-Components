@@ -4,7 +4,7 @@
 
 </div>
 
-<!-- This section deals with Content Projection -->
+<!-- CONTENT PROJECTION -->
 <!-- Here with this ngIf notation we only display course[0] content -->
 <!-- So in the app template as a child of the course-card compoennt we pass on 
 configuration, in this case an image tag. And from within the course-card 
@@ -41,7 +41,7 @@ template we project the image element here into the component. -->
 
 
 
-<!-- Template Querying with View Child and View Children:
+<!-- TEMPLATE QUERYING WITH VIEW CHILD AND VIEW CHILDREN:
 We perform a template query to obtain a reference to
 an element template and access it at the level of our
 component class. -->
@@ -74,6 +74,8 @@ when we click on the button. -->
 
 <!-- <h1> {{ coreCourse.description }} </h1> -->
 
+
+<!-- PIPES -->
 <!-- Pipes take the left side as an input and apply to it
 the right hand side which is a function.
 They serve the purpose of formatting for example. -->
@@ -95,6 +97,8 @@ They serve the purpose of formatting for example. -->
     </div> -->
 <!-- </div>
 <div> -->
+
+<!-- DEFER -->
 <!-- defer allows you to defer loading relevant js bundles
 in the default case: it will start loading the js when the page
 has finished loading of all the previous js, that is when the browser
@@ -202,6 +206,8 @@ when the browser becomes idle.
 
 <!-- <div class="courses"> -->
 
+
+<!-- NG FOR AND FOR DIRECTIVE-->
 <!-- This old syntax ngFor has been replaced by the for directive.
         it has similar features as the new modern for, that is, an index,
         first, last, even and odd, which can be applied to classes defined
