@@ -12,8 +12,8 @@
     Project by tag -->
     <!-- <ng-content select="img"></ng-content> -->
     <!-- Project by class -->
-    <ng-content select=".course-image"></ng-content>
-    <ng-content select=".course-description"></ng-content>
+    <!-- <ng-content select=".course-image"></ng-content>
+    <ng-content select=".course-description"></ng-content> -->
     <!-- Project by component-->
     <!-- <ng-content select="course-image"></ng-content> -->
  
@@ -29,6 +29,21 @@
         <img src="/assets/empty-image.png">
 
     </ng-template> -->
+
+    <!-- Template Instantiation: Here we will pass to the ng-content tag
+    in the if clause a reference to a template called noImage. Whenever 
+    there is no image available the ng-template tag will be invoked. Inside 
+    the ng-template tag there's an instance of ngTemplate inside the ng-container 
+    The actual template resides in app.component.html but its instance is here and 
+    through the noImageTpl input we are receiving the template reference -->
+    <ng-content select=".course-image"
+                *ngIf="course.iconUrl; else noImage"></ng-content>
+    <ng-template #noImage>
+        <ng-container *ngTemplateOutlet="noImageTpl; 
+        context: {description: course.description}"></ng-container>
+    </ng-template>
+
+    <ng-content select=".course-description"></ng-content>
 
     <div class="course-category" [ngSwitch]="course.category">
         <div class="category" *ngSwitchCase="'BEGINNER'">Beginner</div>

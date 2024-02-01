@@ -11,7 +11,40 @@ configuration, in this case an image tag. And from within the course-card
 template we project the image element here into the component. -->
 
 <div class="courses" *ngIf="courses[0] as course">
-    <course-card (courseSelected)="onCourseSelected($event)" [course]="course">
+
+<!-- INSTANTIATING TEMPLATES-->
+
+<!-- Here we define an abstract template tag-->
+<!-- We define a variable courseName with the let- keyword
+    and we assign to it the value of the content of the template
+    instance below.
+-->
+<!-- <ng-template #blankImage let-courseName="description">
+    <p class="warn">{{courseName}} has no image yet.</p>
+    <img src="/assets/empty-image.png">
+</ng-template> -->
+<!-- Here we create instances of those tags-->
+<!-- Each instance defines a value for variable description
+which is then passed to the abstract ng-template tag.-->
+<!-- <div *ngTemplateOutlet="blankImage; 
+context: {description: course.description}"></div>
+<div *ngTemplateOutlet="blankImage; 
+context: {description: courses[1].description}"></div>
+<hr>
+<hr> -->
+
+<!-- Here we create an ng-template tag to be instantiated elsewhere.
+We will pass the template to the course-card component as an input parameter-->
+<ng-template #blankImage let-courseName="description">
+    <p class="warn">{{courseName}} has no image yet.</p>
+    <img src="/assets/empty-image.png">
+</ng-template>
+
+
+<!-- Here we are creating an input noImageTpl and we pass to it a reference (blankImage)
+which is a reference to the ng-template tag above. In the course-card model we will 
+pass the noImage as an input variable-->
+    <course-card (courseSelected)="onCourseSelected($event)" [course]="course" [noImageTpl]="blankImage">
 
         <div class="course-image" #courseImage>
 
@@ -21,9 +54,10 @@ template we project the image element here into the component. -->
 
         <!-- <course-image [src]="course.iconUrl"></course-image> -->
 
+        <!-- 
         <course-image [src]="courses[0].iconUrl"></course-image>
         <course-image [src]="courses[1].iconUrl"></course-image>
-        <course-image [src]="courses[2].iconUrl"></course-image>
+        <course-image [src]="courses[2].iconUrl"></course-image> -->
 
         <div class="course-description">
             {{ course.longDescription }}

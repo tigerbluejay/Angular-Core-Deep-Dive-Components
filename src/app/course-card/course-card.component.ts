@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter, Output, ContentChild, AfterViewInit, ElementRef, ContentChildren, AfterContentInit, QueryList} from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, ContentChild, AfterViewInit, ElementRef, ContentChildren, AfterContentInit, QueryList, TemplateRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { COURSES } from '../../db-data';
 import { Course } from '../model/course';
@@ -39,6 +39,11 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
 
   @Input()
   cardIndex: number;
+
+  // here we are creating an input with a reference to a template
+  // which we will be able to use in the course card component
+  @Input()
+  noImageTpl: TemplateRef<any>;
 
 
   @Output('courseSelected')
