@@ -1,157 +1,149 @@
+# Angular Project Overview
+This Angular project demonstrates core concepts of component-based architecture, content projection, templating, directives, and event-driven communication. It illustrates foundational Angular techniques useful for building dynamic and maintainable UI applications.
 
-##  Angular Core Deep Dive (Video Course)
+1. Module Configuration and Bootstrapping (app.module.ts)
+### Conceptual Overview
+The root module configures the Angular application by declaring components, importing required Angular modules, and bootstrapping the root component. This module defines the scope and dependencies for the application, enabling Angular’s compilation and dependency injection systems.
 
-This repository contains the code of the [Angular Core Deep Dive](https://angular-university.io/course/angular-course).
+### Implementation Details
+The module declares components such as the root component and feature components, imports browser and common functionality modules, and bootstraps the root component. This setup initializes the Angular app and sets the foundation for component rendering.
 
-This course repository is updated to Angular v17:
+2. Root Component Functionality (AppComponent)
+### Conceptual Overview
+The root component controls the main view and application state. Angular lifecycle hooks like ngAfterViewInit() provide access to child components and templates once the view is initialized. Reactive programming through observables and event emitters facilitates component communication and state management.
 
-![Angular Core Deep Dive](https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png)
+### Implementation Details
+The root component maintains a list of course data displayed using child components. It employs @ViewChild and @ViewChildren decorators to query and interact with child components and templates dynamically after the view is rendered. Event handlers listen to emitted events from child components, enabling responsive UI behavior.
 
+3. Content Projection and Content Queries (ng-content, ContentChild, ContentChildren)
+### Conceptual Overview
+Content projection allows parent components to insert custom content into child components, enabling flexible and reusable UI composition. Content queries provide programmatic access to projected elements and templates, facilitating dynamic behavior based on parent-supplied content.
 
-# Installation pre-requisites
+### Implementation Details
+The feature components use content projection to accept templates or markup such as course images and descriptions. Content queries retrieve references to this projected content, allowing components to manipulate or render it conditionally.
 
-IMPORTANT: Please use Node 18 (Long Term Support version). 
+4. Template Instantiation and View Queries (ng-template, TemplateRef, ViewChild)
+### Conceptual Overview
+ng-template defines reusable, non-rendered template fragments that can be instantiated dynamically. TemplateRef represents references to these templates, and *ngTemplateOutlet inserts them into the DOM. View queries like @ViewChild access child components and templates within the component's own view.
 
-# Installing the Angular CLI
+### Implementation Details
+Templates such as fallback content are defined using ng-template and instantiated via *ngTemplateOutlet. View queries locate these templates and child components, enabling dynamic rendering and interaction after the view is initialized.
 
-With the following command the angular-cli will be installed globally in your machine:
+5. Structural Directives (*ngIf, *ngFor, Deferred Loading, Conditional Rendering)
+### Conceptual Overview
+Structural directives control DOM structure by adding, removing, or iterating over elements based on application state. Conditional rendering and deferred loading optimize UI responsiveness and performance.
 
-    npm install -g @angular/cli
+### Implementation Details
+Conditional directives ensure elements such as course cards and images render only when relevant data exists. Iteration directives display lists of courses. Conditional logic implements fallback UI elements and optimized rendering paths.
 
+6. Attribute Directives (NgClass, NgStyle)
+### Conceptual Overview
+Attribute directives dynamically modify element classes and styles based on component state or logic. This facilitates responsive design and dynamic styling without manual DOM manipulation.
 
-# How To install this repository
+### Implementation Details
+Components apply dynamic CSS classes and inline styles to reflect course difficulty levels and other states. Multiple classes and style properties are applied conditionally using Angular binding syntax.
 
-We can install the master branch using the following commands:
+7. Logical Grouping (ng-container)
+### Conceptual Overview
+ng-container groups elements logically without rendering an actual DOM node. This avoids unnecessary wrappers while applying structural directives to multiple elements.
 
-    git clone https://github.com/angular-university/angular-course.git
+### Implementation Details
+Logical grouping organizes conditional blocks and projected content cleanly, ensuring semantic and optimized DOM output.
 
-This repository is made of several separate npm modules, that are installable separately. For example, to run the au-input module, we can do the following:
+8. Conditional Rendering with ngSwitch
+### Conceptual Overview
+ngSwitch renders different elements based on the value of an expression, simplifying multiple exclusive conditions.
 
-    cd angular-course
-    npm install
+### Implementation Details
+Category-specific badges and UI variations render through *ngSwitchCase blocks, providing maintainable conditional rendering of course categories.
 
-Its also possible to install the modules as usual using npm:
+9. Event Handling and Component Communication
+### Conceptual Overview
+Angular enables communication between components via input bindings and output events. Child components emit events that parents subscribe to for reactive interaction.
 
-    npm install
+### Implementation Details
+Child components emit events on user interaction, such as when a course is viewed. The root component listens and responds to these events, facilitating coordinated UI behavior and data flow.
 
-NPM 5 or above has the big advantage that if you use it you will be installing the exact same dependencies than I installed in my machine, so you wont run into issues caused by semantic versioning updates.
+10. Dedicated Course Image Component
+### Conceptual Overview
+Encapsulating image rendering in a dedicated component promotes separation of concerns and reusability, simplifying parent component templates.
 
-This should take a couple of minutes. If there are issues, please post the complete error message in the Questions section of the course.
+### Implementation Details
+The image component displays course images with support for fallback content. It accepts inputs for image URLs and projected templates, integrating with content projection and dynamic templates to render image-related UI elements.
 
-# To Run the Development Backend Server
+## Summary
+This project exemplifies core Angular patterns including modular configuration, component lifecycle management, template-driven UI composition, reactive event handling, and dynamic styling. It demonstrates how to build flexible, maintainable interfaces with powerful Angular features like content projection, structural and attribute directives, and component communication.
 
-In order to be able to provide realistic examples, we will need in our playground a small REST API backend server. We can start the sample application backend with the following command:
 
-    npm run server
 
-This is a small Node REST API server.
+# Usage Notes
+## Adding or Modifying Courses
+- The course data list is maintained in the root component (AppComponent). To add or update courses, modify the array holding course objects, each with properties such as title, description, category, and imageUrl.
+- The root component uses *ngFor to render a CourseCardComponent for each course, automatically reflecting changes in the list.
+- When adding courses, ensure the image URLs are valid or provide fallback templates within the CourseImageComponent.
 
-# To run the Development UI Server
+## Customizing Templates and Content Projection
+- CourseCardComponent and CourseImageComponent use content projection (<ng-content>) to allow injecting custom markup like descriptions or overlays.
+- To customize how a course’s image or details appear, supply alternate templates or elements inside the course card’s usage in the root component template.
+- Use ng-template to define reusable templates and pass them as projected content where needed.
 
-To run the frontend part of our code, we will use the Angular CLI:
+Example:
 
-    npm start
+```html
+<app-course-card [course]="course">
+  <ng-template #customDescription>
+    <p>Custom description for {{ course.title }}</p>
+  </ng-template>
+</app-course-card>
+```
 
-The application is visible at port 4200: [http://localhost:4200](http://localhost:4200)
-
-
-
-# Important
-
-This repository has multiple branches, have a look at the beginning of each section to see the name of the branch.
-
-At certain points along the course, you will be asked to checkout other remote branches other than master. You can view all branches that you have available remotely using the following command:
-
-    git branch -a
-
-  The remote branches have their starting in origin, such as for example 1-navigation-and-containers.
-
-We can checkout the remote branch and start tracking it with a local branch that has the same name, by using the following command:
-
-      git checkout -b section-1 origin/1-navigation-and-containers
-
-It's also possible to download a ZIP file for a given branch,  using the branch dropdown on this page on the top left, and then selecting the Clone or Download / Download as ZIP button.
-
-# Other Courses
-
-# RxJs In Practice Course
-
-If you are looking for the [RxJs In Practice Course](https://angular-university.io/course/rxjs-course), the repo with the full code can be found here:
-
-![RxJs In Practice Course](https://s3-us-west-1.amazonaws.com/angular-university/course-images/rxjs-in-practice-course.png)
-
-
-# NgRx In Depth Course
-
-If you are looking for the [NgRx In Depth Course](https://angular-university.io/course/angular-ngrx-course), the repo with the full code can be found here:
-
-![NgRx In Depth Course](https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-ngrx-course.png)
-
-
-
-# Angular PWA Course
-
-If you are looking for the [Angular PWA Course](https://angular-university.io/course/angular-pwa-course), the repo with the full code can be found here:
-
-![Angular PWA Course - Build the future of the Web Today](https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-pwa-course.png)
-
-# Angular Security Masterclass
-
-If you are looking for the [Angular Security Masterclass](https://angular-university.io/course/angular-security-course), the repo with the full code can be found here:
-
-[Angular Security Masterclass](https://github.com/angular-university/angular-security-course).
-
-![Angular Security Masterclass](https://s3-us-west-1.amazonaws.com/angular-university/course-images/security-cover-small-v2.png)
-
-# Angular Advanced Library Laboratory Course
-
-If you are looking for the Angular Advanced Course, the repo with the full code can be found here:
-
-[Angular Advanced Library Laboratory Course: Build Your Own Library](https://angular-university.io/course/angular-advanced-course).
-
-![Angular Advanced Library Laboratory Course: Build Your Own Library](https://angular-academy.s3.amazonaws.com/thumbnails/advanced_angular-small-v3.png)
-
-
-## RxJs and Reactive Patterns Angular Architecture Course
-
-If you are looking for the RxJs and Reactive Patterns Angular Architecture Course code, the repo with the full code can be found here:
-
-[RxJs and Reactive Patterns Angular Architecture Course](https://angular-university.io/course/reactive-angular-architecture-course)
-
-![RxJs and Reactive Patterns Angular Architecture Course](https://s3-us-west-1.amazonaws.com/angular-academy/blog/images/rxjs-reactive-patterns-small.png)
-
-
-
-## Angular Ngrx Reactive Extensions Architecture Course
-
-If you are looking for the Angular Ngrx Reactive Extensions Architecture Course code, the repo with the full code can be found here:
-
-[Angular Ngrx Reactive Extensions Architecture Course](https://angular-university.io/course/angular2-ngrx)
-
-[Github repo for this course](https://github.com/angular-university/ngrx-course)
-
-![Angular Ngrx Course](https://angular-academy.s3.amazonaws.com/thumbnails/ngrx-angular.png)
-
-
-
-## Angular 2 and Firebase - Build a Web Application Course
-
-If you are looking for the Angular 2 and Firebase - Build a Web Application Course code, the repo with the full code can be found here:
-
-[Angular 2 and Firebase - Build a Web Application](https://angular-university.io/course/build-an-application-with-angular2)
-
-[Github repo for this course](https://github.com/angular-university/angular-firebase-app)
-
-![Angular firebase course](https://angular-academy.s3.amazonaws.com/thumbnails/angular_app-firebase-small.jpg)
-
-
-## Complete Typescript 2 Course - Build A REST API
-
-If you are looking for the Complete Typescript 2 Course - Build a REST API, the repo with the full code can be found here:
-
-[https://angular-university.io/course/typescript-2-tutorial](https://github.com/angular-university/complete-typescript-course)
-
-[Github repo for this course](https://github.com/angular-university/complete-typescript-course)
-
-![Complete Typescript Course](https://angular-academy.s3.amazonaws.com/thumbnails/typescript-2-small.png)
-
+## Handling Events
+- Child components emit events such as courseViewed or courseSelected to notify the root component of user actions.
+- Use Angular’s event binding syntax ((eventName)="handler($event)") to subscribe to these events in the root component template.
+- In the root component’s TypeScript, define handlers to update state or trigger side effects like logging or navigation.
+
+Example:
+
+```html
+<app-course-card
+  *ngFor="let course of courses"
+  [course]="course"
+  (courseViewed)="onCourseViewed($event)">
+</app-course-card>
+```
+
+```ts
+onCourseViewed(course) {
+  console.log('Viewed course:', course.title);
+  // Additional logic here
+}
+```
+
+## Using Structural and Attribute Directives
+- Structural directives like *ngIf and *ngFor control what is rendered based on course data availability and filtering conditions.
+- Attribute directives NgClass and NgStyle dynamically update styles according to course properties (e.g., difficulty or category).
+- Modify or extend these bindings inside CourseCardComponent or the root component to change styling or conditional rendering logic.
+
+# Diagrams
+
+## Component Hierarchy
+graph TD
+  A[AppComponent]
+  A --> B[CourseCardComponent (multiple)]
+  B --> C[CourseImageComponent]
+  B --> D[Projected Content (ng-content)]
+
+## Data and Event Flow
+
+graph LR
+AC[AppComponent] -- passes course data --> CC[CourseCardComponent]
+  CC -- passes image URL --> CIC[CourseImageComponent]
+  CC -- emits event (courseViewed) --> AC
+  AC -- listens to events, updates UI/state --> AC
+
+## Content Projection and Template Querying
+
+graph TD
+  AC[AppComponent Template] --> CC[app-course-card]
+  CC --> PC[ng-content (projected content)]
+  CC --> CQ[ContentChild / ContentChildren queries]
