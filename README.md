@@ -127,6 +127,7 @@ onCourseViewed(course) {
 
 ## Component Hierarchy
 
+```plaintext
 AppComponent
 │
 ├── CourseCardComponent (multiple via *ngFor)
@@ -134,9 +135,11 @@ AppComponent
 │     └── Projected Content (via ng-content)
 │
 └── Other possible components/templates
+```
 
 ## Data and Event Flow
 
+```plaintext
 [AppComponent]
    |
    |-- passes course data --> [CourseCardComponent]
@@ -146,9 +149,11 @@ AppComponent
    |                              |-- emits event (e.g. courseViewed) -- back --> [AppComponent]
    |
    |-- listens to events and updates UI/state
+```
 
 ## Content Projection and Template Querying
 
+```plaintext
 [AppComponent Template]
    |
    |-- <app-course-card>
@@ -156,3 +161,4 @@ AppComponent
           |-- <ng-content>  <-- projected content (custom templates or markup)
           |
           |-- queries projected content using ContentChild/ContentChildren
+```
