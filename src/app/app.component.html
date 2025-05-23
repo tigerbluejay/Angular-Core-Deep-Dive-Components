@@ -12,29 +12,28 @@ template we project the image element here into the component. -->
 
 <div class="courses" *ngIf="courses[0] as course">
 
-<!-- INSTANTIATING TEMPLATES-->
+<!-- INSTANTIATING TEMPLATES
 
-<!-- Here we define an abstract template tag-->
-<!-- We define a variable courseName with the let- keyword
-    and we assign to it the value of the content of the template
-    instance below.
--->
-<!-- <ng-template #blankImage let-courseName="description">
+Here we define an abstract template tag
+We define a variable courseName with the let- keyword and we assign to it the value of the content 
+of the template instance below.
+
+<ng-template #blankImage let-courseName="description">
     <p class="warn">{{courseName}} has no image yet.</p>
     <img src="/assets/empty-image.png">
-</ng-template> -->
-<!-- Here we create instances of those tags-->
-<!-- Each instance defines a value for variable description
-which is then passed to the abstract ng-template tag.-->
-<!-- <div *ngTemplateOutlet="blankImage; 
-context: {description: course.description}"></div>
-<div *ngTemplateOutlet="blankImage; 
-context: {description: courses[1].description}"></div>
-<hr>
-<hr> -->
+</ng-template>
 
-<!-- Here we create an ng-template tag to be instantiated elsewhere.
+Here we create instances of those tags
+Each instance defines a value for variable description
+which is then passed to the abstract ng-template tag.
+
+    <div *ngTemplateOutlet="blankImage; context: {description: course.description}"></div>
+    <div *ngTemplateOutlet="blankImage; context: {description: courses[1].description}"></div>
+
+
+Here we create an ng-template tag to be instantiated elsewhere.
 We will pass the template to the course-card component as an input parameter-->
+
 <ng-template #blankImage let-courseName="description">
     <p class="warn">{{courseName}} has no image yet.</p>
     <img src="/assets/empty-image.png">
@@ -68,21 +67,12 @@ pass the noImage as an input variable-->
 </div>
 
 
-
-
-
-
-
-
-
 <!-- TEMPLATE QUERYING WITH VIEW CHILD AND VIEW CHILDREN:
-We perform a template query to obtain a reference to
-an element template and access it at the level of our
-component class. -->
+We perform a template query to obtain a reference to an element template and access it at the level of our component class.
 
-<!-- The onCoursesEdited event handler method will be called
-when we click on the button. -->
-<!-- <button (click)="onCoursesEdited()">Edit Courses</button>
+The onCoursesEdited event handler method will be called when we click on the button.
+
+<button (click)="onCoursesEdited()">Edit Courses</button>
 
 <div class="courses" #container>
     
@@ -109,10 +99,10 @@ when we click on the button. -->
 <!-- <h1> {{ coreCourse.description }} </h1> -->
 
 
-<!-- PIPES -->
-<!-- Pipes take the left side as an input and apply to it
-the right hand side which is a function.
+<!-- PIPES
+Pipes take the left side as an input and apply to it the right hand side which is a function.
 They serve the purpose of formatting for example. -->
+
 <!-- <div class="demo">
     <div>Start Date: {{startDate | date: 'MMM/dd/yyyy' }} </div>
     <div>Title: {{title | uppercase }} </div>
@@ -121,55 +111,45 @@ They serve the purpose of formatting for example. -->
     <div>Price: {{price | number: '3.3-5'}} </div>
     <div>Price: {{price | currency: 'EUR'}} </div>
     <div>Rate: {{rate | percent }} </div> -->
-<!-- The json pipe transforms the output to json
-    which is useful for debugging purposes -->
+
+<!-- The json pipe transforms the output to json which is useful for debugging purposes -->
 <!-- <div>Json: {{courses | json }}</div> -->
-<!-- They keyvalue pipe serves to print the keyvalue
-    pairs especially when looping though the properties of an object -->
+
+<!-- They keyvalue pipe serves to print the keyvalue pairs especially when looping though the properties of an object -->
 <!-- <div *ngFor="let pair of course | keyvalue ">
         {{ pair.key + ': ' + pair.value }}
     </div> -->
-<!-- </div>
-<div> -->
+
 
 <!-- DEFER -->
-<!-- defer allows you to defer loading relevant js bundles
-in the default case: it will start loading the js when the page
-has finished loading of all the previous js, that is when the browser
-becomes idle.
-In the default case, the js is loaded and the js is displayed both
-when the browser becomes idle.
--->
+<!--Defer allows you to defer loading relevant js bundles in the default case: it will start loading the js when the page
+has finished loading of all the previous js, that is when the browser becomes idle.
+In the default case, the js is loaded and the js is displayed both when the browser becomes idle. -->
+
 <!-- @defer { -->
-<!-- this defer, defers on idle so you can rewrite it
-        alternatively as
+<!-- this defer, defers on idle so you can rewrite it alternatively as
         1) @defer (on idle; prefetch on idle)
         or alternatively as
         2) @defer (on immediate; prefetch on immediate)
-        remember that if you use "on" only and you don´t define
-        "prefetch", angular understands that you will be using
+        
+        Remember that if you use "on" only and you don´t define "prefetch", angular understands that you will be using
         the trigger that you defined on on, also on prefetch.
         Prefetch refers to fetching or loading the javascript code.
         While on refers to actually displaying the code on screen.
     -->
-<!-- Now with the timer trigger we specify a time for prefetch
-        and a time for on, for example
+<!-- Now with the timer trigger we specify a time for prefetch and a time for on, for example
         3) @defer (on timer(15s); prefetch timer(10s))
-        means the contents of the defer block will not be displayed 
-        until 15 seconds pass, that is 5 seconds after is the js is loaded. 
+        means the contents of the defer block will not be displayed until 15 seconds pass, that is 5 seconds after is the js is loaded. 
     -->
 <!-- Now only when the component is visible it will load.
         4) @defer (on viewport; prefetch on idle)
-        On viewport then means that once the view space where
-        the component would load is visible, then it will load. 
+        On viewport then means that once the view space where the component would load is visible, then it will load. 
     -->
-<!-- If we want the content to load when an html element becomes visible 
-        then we first define an html element such as 
+<!-- If we want the content to load when an html element becomes visible then we first define an html element such as 
         <h1 #title>The visibility of this element will trigger the content</h1>
         then we define the defer block as such
         5) @defer (on viewport(title); prefetch on idle)
-        So what happens is when the h1 element named title is visible
-        the contents of the defer block will be displayed to the user. 
+        So what happens is when the h1 element named title is visible the contents of the defer block will be displayed to the user. 
     -->
 <!-- The interaction trigger interacts with the placeholder content.
         This means focusing and typing, or clicking or any interaction with
@@ -187,12 +167,13 @@ when the browser becomes idle.
         And when we click on on the button, the contents of the defer block will load. 
     -->
 <!-- Now the hover trigger.
-        if we do the following:
+        If we do the following:
         8) @defer (on interaction(display); prefetch on hover)
         that is we use hover as a standalone argument,
         then the prefetch will occur when we hover over the
         placeholder block content. Then if i click on the html element 
         that has the name of display, then the defer block contents will load.
+        
         Now for the final hover example.
         Suppose we have this code outside the placeholder block.
         <div #triggerDisplay sytle="border: 5px solid red; min-height: 200px; margin: 10px;">
@@ -208,14 +189,16 @@ when the browser becomes idle.
 <!-- Finally we can define custom triggers. How?
         Suppose you have 
         10) @defer(when display; prefetch when performPrefetch)
-        On custom triggers we use the keyword when, and 
-        the triggers will be fired when display and performPrefetch 
+        
+        On custom triggers we use the keyword when, and the triggers will be fired when display and performPrefetch 
         or any other such arbirarily named variable, is true.
+        
         We also have the following html 
         <div>
             <button (click)="onPrefetch()">Trigger Prefetch</button>
             <button (click)="onDisplay()">Trigger Display</button>
         </div>
+        
         Such that when we click the buttons the methods will be invoked.
         These methods change the display and performPrefetch variables to true. 
         These variables in turn are defined in the model ts file. 
@@ -231,11 +214,10 @@ when the browser becomes idle.
                 this.display = true;
             }
         } 
-        So now when the buttons are clicked the variables turn to true 
-        and the triggers are triggered.
-        Finally for all these examples note that if you trigger the on or 
-        when display properties befor triggering the prefetch, the prefetch is
-        immediately triggered to accomodate to the display trigger, which has priority 
+        
+        So now when the buttons are clicked the variables turn to true and the triggers are triggered.
+        Finally for all these examples note that if you trigger the on or when display properties befor triggering the prefetch, 
+        the prefetch is immediately triggered to accomodate to the display trigger, which has priority 
     -->
 
 <!-- <div class="courses"> -->
@@ -243,13 +225,10 @@ when the browser becomes idle.
 
 <!-- NG FOR AND FOR DIRECTIVE-->
 <!-- This old syntax ngFor has been replaced by the for directive.
-        it has similar features as the new modern for, that is, an index,
-        first, last, even and odd, which can be applied to classes defined
-        in the stylesheet. cardIndex i+1 is applied so that in the loop
-        the index changes for every card.
-        Remember we have to define cardIndex in the model (), that is, in the
-        course-card.component.ts file. Also to display we have to add courseIndex
-        to the view, that is in course-card.html. -->
+     It has similar features as the new modern for, that is, an index, first, last, even and odd, which can be applied to classes defined in the stylesheet. cardIndex i+1 is applied so that in the loop the index changes for every card.
+    
+     Remember we have to define cardIndex in the model (), that is, in the course-card.component.ts file. 
+     Also to display we have to add courseIndex to the view, that is in course-card.html. -->
 <!-- <course-card *ngFor="let course of courses; index as i;
             first as isFirst; last as isLast; even as isEven; odd as isOdd;"
             [class.is-first]="isFirst"
@@ -263,7 +242,9 @@ when the browser becomes idle.
         syntax we can use the command in the terminal "ng generate @angular/core:control-flow"
          -->
 <!-- @for works for arrays and for any other javascript iterable-->
+
 <!-- track allows angular to not have to reload the list when a new course is added to the data-->
+
 <!-- $index is a 0 based index that displays the index of the item currently being iterated 
         $count is a variable that counts the total number of items iterated,
         $first and $last identify the first and last elements in the array, and by the syntax below
@@ -283,7 +264,8 @@ when the browser becomes idle.
         @empty {
             <h1>No courses found</h1>
         } -->
-<!-- here we implement a tracking function on the track property,
+
+<!-- Here we implement a tracking function on the track property,
         in the case you were to receive a list of strings, you can track the
         list of strings directly. Here we implement tracking function trackCourse
         you could also do "track $index", it´s not ideal but it will allow the app to work-->
@@ -344,30 +326,22 @@ when the browser becomes idle.
 @error {
     <h2>An error has occurred!</h2>
 } -->
-<!-- instead of the placeholder block immediately after the defer block
-we can use the loading indicator, which is intented to
-display a loading message letting the user know the content is
-loading
-if the loading process takes more than 1 second, only then show
-the loading indicator for 3 seconds-->
+<!-- Instead of the placeholder block immediately after the defer block we can use the loading indicator, which is intented to
+display a loading message letting the user know the content is loading if the loading process takes more than 1 second, 
+only then show the loading indicator for 3 seconds-->
 
-<!-- the placeholder replaces the defer template content
-until the defer is ready to display the content
-in the optional parentheses you can specify a minimum display
-time for the placeholder content
-Usually in the placeholder we put a simplified version of
-the template that is displayed in the defered block
-anything you put in the placeholder will not be defered 
+<!-- the placeholder replaces the defer template content until the defer is ready to display the content in the optional 
+parentheses you can specify a minimum display time for the placeholder content
+Usually in the placeholder we put a simplified version of the template that is displayed in the defered block anything you put in the placeholder will not be defered 
 @placeholder(minimum 3s) {
     <h2>Wait until the contents load please</h2>
 }
 -->
+
 <!-- the
 @error 
-block contents will display after the defer on condition
-attempts to execute. So first the defer prefetch is executed
-then the defer on is executed, and if that fails, then the
-error block contents load.
+block contents will display after the defer on condition attempts to execute. So first the defer prefetch is executed
+then the defer on is executed, and if that fails, then the error block contents load.
 Here we put on this block a simple error message-->
 
 

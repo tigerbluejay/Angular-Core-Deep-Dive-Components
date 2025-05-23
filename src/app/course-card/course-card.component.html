@@ -4,22 +4,21 @@
     </div>
 
     <!-- CONTENT PROJECTION-->
-    <!-- This tag loads the content projected from the child tag of 
-    the course card element in the app.component view. -->
+    <!-- This tag loads the content projected from the child tag of the course card element in the app.component view. -->
     <!-- <ng-content></ng-content> -->
 
-    <!-- We can also restrain what gets projected
-    Project by tag -->
+    <!-- We can also restrain what gets projected. Project by tag -->
     <!-- <ng-content select="img"></ng-content> -->
+    
     <!-- Project by class -->
     <!-- <ng-content select=".course-image"></ng-content>
     <ng-content select=".course-description"></ng-content> -->
+    
     <!-- Project by component-->
     <!-- <ng-content select="course-image"></ng-content> -->
  
     <!-- ngTemplate -->
-    <!-- Here we say if there is no iconUrl, then display the 
-    ngtemplate block titled #blankImage -->
+    <!-- Here we say if there is no iconUrl, then display the ngtemplate block titled #blankImage -->
     <!-- <ng-content select=".course-image"
         *ngIf="course.iconUrl; else blankImage"></ng-content>
 
@@ -30,12 +29,10 @@
 
     </ng-template> -->
 
-    <!-- Template Instantiation: Here we will pass to the ng-content tag
-    in the if clause a reference to a template called noImage. Whenever 
-    there is no image available the ng-template tag will be invoked. Inside 
-    the ng-template tag there's an instance of ngTemplate inside the ng-container 
-    The actual template resides in app.component.html but its instance is here and 
-    through the noImageTpl input we are receiving the template reference -->
+    <!-- Template Instantiation: Here we will pass to the ng-content tag in the if clause a reference to a template called noImage. 
+    Whenever there is no image available the ng-template tag will be invoked. Inside the ng-template tag there's an instance of 
+    ngTemplate inside the ng-container. The actual template resides in app.component.html but its instance is here and through the 
+    noImageTpl input we are receiving the template reference -->
     <ng-content select=".course-image"
                 *ngIf="course.iconUrl; else noImage"></ng-content>
     <ng-template #noImage>
@@ -59,18 +56,12 @@
 
 
 <!-- NG CONTAINER-->
-<!-- If we don't have a div element to apply the ngif or
-other such directive to a bunch of nested tags, We
-can use the ng-container element to prevent us from gratuitiously
-adding a div. We can apply to an ngSwitch or an ngCase also
+<!-- If we don't have a div element to apply the ngif or other such directive to a bunch of nested tags, We can use the ng-container element to prevent us from gratuitiously adding a div. We can apply to an ngSwitch or an ngCase also
 <ng-container *ngIf="course">
 </ng-container> -->
 
 <!-- NG IF-->
-<!-- If we use ngIf at the parent level html element if course is not defined
-then the contents of the card will not display. This makes uncesseary using
-the questionmark in course?.description for example when trying to avoid
-problems when the course is undefined. -->
+<!-- If we use ngIf at the parent level html element if course is not defined then the contents of the card will not display. This makes uncesseary using the questionmark in course?.description for example when trying to avoid problems when the course is undefined. -->
 
 <!-- NG CLASS-->
 <!-- ngClass will apply a css class to only certain components. -->
@@ -79,15 +70,14 @@ problems when the course is undefined. -->
 [ngClass]="['beginner', 'course-card']"> you can pass an array of classes
 [ngClass]="{'beginner': true, 'course-card'= false}"> you can pass a configuration object with 
 true or false depending on if you want the style to be applied or not.-->
+
 <!-- Or we can pass a function that returns a configuration object. -->
 <!-- <div class="course-card" *ngIf="course"
 [ngClass]="cardClasses()"> -->
 
 
 <!-- NG STYLE-->
-<!-- On the following example we apply as a style a function that 
-returns a background image applied at the level of
-the card so the whole card is backgrounded with the image. -->
+<!-- On the following example we apply as a style a function that returns a background image applied at the level of the card so the whole card is backgrounded with the image. -->
 <!-- <div class="course-card" *ngIf="course"
 [ngClass]="cardClasses()"
 [ngStyle]="styleClasses()"> -->
@@ -98,13 +88,10 @@ the card so the whole card is backgrounded with the image. -->
 <!-- <div class="course-title" [ngStyle]="cardStyles()"> -->
 
 <!-- BASICS-->
-<!-- this reads the title from the course-card component tag
-        and the course card component-->
+<!-- this reads the title from the course-card component tag and the course card component-->
 <!-- {{ title }} -->
-<!-- this reads the course object and its properties, as defined 
-        in the course-card component-->
-<!-- We can add a question mark which will see if course is null
-        if it is, it doesn´t diplay and we avoid an undefined error. -->
+<!-- this reads the course object and its properties, as defined in the course-card component-->
+<!-- We can add a question mark which will see if course is null if it is, it doesn´t diplay and we avoid an undefined error. -->
 <!-- {{ index || '' }} {{ course?.description }} -->
 <!-- {{ cardIndex + ' ' + course.description }} -->
 <!-- </div> -->
@@ -113,26 +100,21 @@ the card so the whole card is backgrounded with the image. -->
 
 
 <!-- NG IF - CONTINUED -->
-<!-- With ngIf if the object we pass to ngIf is undefined it will evaluate
-    to false and the html element will not display. If it is defined, it will
-    return true and the html element will display. -->
+<!-- With ngIf if the object we pass to ngIf is undefined it will evaluate to false and the html element will not display. 
+If it is defined, it will return true and the html element will display. -->
 <!-- <img width="300" alt="Angular Logo" 
     *ngIf="course.iconUrl" [src]="course.iconUrl"> -->
 
-<!-- Alternatively we can pass a function that can evaluate to true if certain
-    conditions are met, in this case if the course is defined and if there
-    is an image defined. -->
-
+<!-- Alternatively we can pass a function that can evaluate to true if certain conditions are met, in this case if the course 
+is defined and if there is an image defined. -->
 <!-- <img width="300" alt="Angular Logo" 
     *ngIf="isImageVisible(); else noImage" 
     [src]="course.iconUrl"> -->
 
 
 <!-- IF CONDITIONAL DIRECTIVE -->
-<!-- The if conditional directive works to display html elements or
-    parts of the code based on some condition. In the example below
+<!-- The if conditional directive works to display html elements or parts of the code based on some condition. In the example below
     the if condition is related to the data we are handling. -->
-
 <!-- @if (course.id == 1) {
         <h2>Course with ID 1 detected</h2>
     }
@@ -149,10 +131,8 @@ the card so the whole card is backgrounded with the image. -->
 
 <!-- <div class="course-description"> -->
 
-    <!-- A detailed walk-through of the most important part of Angular - 
-    the Core and Common modules. -->
-<!-- We can add a question mark which will see if course is null
-        if it is, it doesn´t diplay and we avoid an undefined error.-->
+    <!-- A detailed walk-through of the most important part of Angular - the Core and Common modules. -->
+<!-- We can add a question mark which will see if course is null. If it is, it doesn´t diplay and we avoid an undefined error.-->
 <!-- {{ course?.longDescription }} 
     </div> -->
 
@@ -160,8 +140,7 @@ the card so the whole card is backgrounded with the image. -->
 
 <!-- SWITCH DIRECTIVE-->
 
-<!-- Conditionally display items on a page with if or switch to
-    switch within alternatives -->
+<!-- Conditionally display items on a page with if or switch to switch within alternatives -->
 <!-- <div class="course-category">
         @switch(course.category){
             @case ('BEGINNER'){
@@ -194,13 +173,9 @@ the card so the whole card is backgrounded with the image. -->
 </div> -->
 
 <!-- EVENTS 
-On the button html element, there´s a native browser event click associated 
-with a method OnCourseViewed()
+On the button html element, there´s a native browser event click associated with a method OnCourseViewed()
 When the button is clicked, the event is fired as specified in the model.
-The onCourseViewed() method fires an emitter which bubbles up a course object.
-(defined in the Output section of the model)
-The object is intercepted at the parent level on the onCourseSelected method
-of the course-card tag.
-That method receives the course object and prints it as per the onCourseSelected
-method instructions.
+The onCourseViewed() method fires an emitter which bubbles up a course object. (defined in the Output section of the model)
+The object is intercepted at the parent level on the onCourseSelected method of the course-card tag.
+That method receives the course object and prints it as per the onCourseSelected method instructions.
 -->
